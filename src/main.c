@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/08 17:13:23 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/11 18:07:20 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	ft_exception(char *s)
 	exit(EXIT_FAILURE);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	int fd;
-	char *line;
+	int		fd;
+	t_lemin	data;
 
+	data.list = NULL;
 	if (argc > 3)
 		ft_exception("too many arguments");
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
+	while (get_next_line(fd, &data.line) > 0)
 	{
-		ft_check_line(line);
-		ft_putstr(line);
-		ft_putstr("\n");
+		ft_check_line(&data);
+		ft_putendl(data.line);
 	}
 	return (0);
 }

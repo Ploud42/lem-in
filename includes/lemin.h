@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/08 17:12:54 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/11 17:46:12 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,27 @@ typedef struct		s_data
 	struct s_data	*next;
 }					t_data;
 
-void				ft_check_line(char *line);
+typedef struct		s_node
+{
+	char			*name;
+	char			**link;
+	int				x;
+	int				y;
+	struct s_node	*next;
+}					t_node;
+
+typedef struct		s_lemin
+{
+	t_node			*list;
+	char			*line;
+	char			*name;
+	char			**tab;
+	int				i;
+}					t_lemin;
+
+int					ft_check_name(t_lemin *data);
+void				ft_check_line(t_lemin *data);
+
 void				ft_exception(char *s);
 int					get_next_line(const int fd, char **line);
 
