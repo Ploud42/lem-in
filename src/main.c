@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/11 18:07:20 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/14 17:45:33 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		main(int argc, char **argv)
 	t_lemin	data;
 
 	data.list = NULL;
+	data.value = 0;
 	if (argc > 3)
 		ft_exception("too many arguments");
 	fd = open(argv[1], O_RDONLY);
@@ -33,5 +34,6 @@ int		main(int argc, char **argv)
 		ft_check_line(&data);
 		ft_putendl(data.line);
 	}
+	ft_display_node(data.list);
 	return (0);
 }
