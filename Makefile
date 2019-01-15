@@ -6,7 +6,7 @@
 #    By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 16:22:42 by jsobel            #+#    #+#              #
-#    Updated: 2019/01/08 17:09:45 by jsobel           ###   ########.fr        #
+#    Updated: 2019/01/15 19:37:32 by jsobel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME =		lem-in
 SRC =		main.c			\
 			get_next_line.c	\
 			check_line.c	\
+			process.c
 
 OBJ		= $(addprefix ./obj/,$(SRC:.c=.o))
 

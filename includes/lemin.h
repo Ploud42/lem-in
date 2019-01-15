@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/14 18:53:45 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:28:40 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # define BUFF_SIZE	32
 # define ROOM		0
-# define START		1
-# define END		2
+# define START		2
+# define END		1
 
 typedef struct		s_data
 {
@@ -39,6 +39,7 @@ typedef struct		s_node
 	int				x;
 	int				y;
 	int				value;
+	int				weight;
 	struct s_node	*next;
 }					t_node;
 
@@ -52,13 +53,25 @@ typedef struct		s_link
 typedef struct		s_lemin
 {
 	t_node			*list;
+	t_node			*p;
 	t_link			*links;
+	t_link			*t;
 	char			*line;
 	char			*name;
+	char			*start;
+	char			*end;
 	char			**tab;
+	int				i;
 	int				value;
+	int				weight;
+	int				flag;
 }					t_lemin;
 
+void				ft_put_weight(t_lemin data, char *name, int weight);
+void				ft_process_weight(t_lemin *data);
+void				ft_process(t_lemin *data);
+
+void				ft_display_links(t_link *links);
 void				ft_display_node(t_node *list);
 int					ft_check_name(t_lemin *data, char *name);
 void				ft_check_line(t_lemin *data);

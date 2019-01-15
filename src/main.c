@@ -6,12 +6,24 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/14 17:45:33 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:35:30 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
+
+void	ft_display_links(t_link *links)
+{
+	while (links)
+	{
+		ft_putstr(links->name1);
+		ft_putstr(" connected with ");
+		ft_putstr(links->name2);
+		write(1, "\n", 1);
+		links = links->next;
+	}
+}
 
 void	ft_exception(char *s)
 {
@@ -25,6 +37,7 @@ int		main(int argc, char **argv)
 	t_lemin	data;
 
 	data.list = NULL;
+	data.links = NULL;
 	data.value = 0;
 	if (argc > 3)
 		ft_exception("too many arguments");
@@ -35,5 +48,7 @@ int		main(int argc, char **argv)
 		ft_putendl(data.line);
 	}
 	ft_display_node(data.list);
+	ft_display_links(data.links);
+	ft_process(&data);
 	return (0);
 }
