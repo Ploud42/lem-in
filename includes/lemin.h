@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/15 19:28:40 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/16 17:34:52 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ typedef struct		s_lemin
 	int				flag;
 }					t_lemin;
 
-void				ft_put_weight(t_lemin data, char *name, int weight);
+void				ft_put_weight(t_lemin *data, char *name, int weight);
 void				ft_process_weight(t_lemin *data);
 void				ft_process(t_lemin *data);
 
 void				ft_display_links(t_link *links);
-void				ft_display_node(t_node *list);
+void				ft_display_node(t_node *list, int weight);
 int					ft_check_name(t_lemin *data, char *name);
 void				ft_check_line(t_lemin *data);
 

@@ -6,23 +6,28 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/15 19:38:16 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/16 19:52:45 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+#include <stdio.h>
 
 void	ft_put_weight(t_lemin *data, char *name, int weight)
 {
-	t_link *l;
+	t_node *l;
 
 	l = data->list;
 	while (l)
 	{
-		if (l->name = name && (!l->weight || l->weight > weight))
+		if (!ft_strcmp(l->name, name) &&
+		(!l->weight || l->weight > (weight + 1)))
 		{
-			l->weight = weight;
-			data->flag = 1;
+			l->weight = weight + 1;
+			if (l->value == START)
+				data->flag = START;
+			else
+				data->flag = 1;
 			return ;
 		}
 		l = l->next;
@@ -40,12 +45,14 @@ void	ft_process_weight(t_lemin *data)
 		{
 			while (data->t)
 			{
-				if (data->t->name1 == data->p->name)
+				if (!ft_strcmp(data->t->name1, data->p->name))
 					ft_put_weight(data, data->t->name2, data->p->weight);
-				else if (data->t->name2 == data->p->name)
+				else if (!ft_strcmp(data->t->name2, data->p->name))
 					ft_put_weight(data, data->t->name1, data->p->weight);
 				data->t = data->t->next;
 			}
+			if (data->flag == START)
+				return ;
 		}
 		data->p = data->p->next;
 	}

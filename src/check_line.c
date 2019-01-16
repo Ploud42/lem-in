@@ -6,14 +6,14 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/15 19:36:11 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/16 18:23:49 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
 
-void		ft_display_node(t_node *list)
+void		ft_display_node(t_node *list, int weight)
 {
 	while (list)
 	{
@@ -28,6 +28,10 @@ void		ft_display_node(t_node *list)
 			ft_putstr(" end\n");
 		else
 			ft_putstr(" room\n");
+		if (weight)
+		{
+			printf("weight = %d\n", list->weight - 1);
+		}
 		list = list->next;
 	}
 }
