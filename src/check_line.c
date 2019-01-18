@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/16 18:23:49 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/18 17:53:31 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,19 @@ static void	ft_creat_node(t_lemin *data)
 	free(data->tab);
 }
 
-void		ft_check_line(t_lemin *data)
+int			ft_check_line(t_lemin *data)
 {
-	if (data->line[0] != '#' && data->line[0] != 'L' &&
+	if (!data->ants && data->line[0] != '#' && data->line[0] != 'L')
+	{
+		while (data->line[data->i])
+		{
+			if (!ft_isdigit(data->line[data->i++]))
+				ft_exception("ERROR");
+		}
+		if (!(data->ants = ft_atoi(data->line)))
+			ft_exception("ERROR");
+	}
+	else if (data->line[0] != '#' && data->line[0] != 'L' &&
 	ft_strchr(data->line, ' '))
 		ft_creat_node(data);
 	else if (data->line[0] == '#' && data->line[1] == '#')
@@ -128,5 +138,6 @@ void		ft_check_line(t_lemin *data)
 	ft_strchr(data->line, '-'))
 		ft_creat_links(data);
 	else if (!(data->line[0] == '#'))
-		ft_exception("ERROR");
+		return (0);
+	return (1);
 }
