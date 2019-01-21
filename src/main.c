@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/18 18:54:13 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/21 17:07:36 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		main(void)
 
 	data.list = NULL;
 	data.links = NULL;
+	data.way = NULL;
 	data.value = 0;
 	data.ants = 0;
 	data.i = 0;
