@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/21 18:20:36 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/22 19:17:00 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_lemin
 	int				flag;
 }					t_lemin;
 
+void				ft_display_ways(t_way *way);
 int					ft_connect(t_lemin *data, char *name);
 void				ft_save_way(t_lemin *data);
 void				ft_put_weight(t_lemin *data, char *name, int weight);

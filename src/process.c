@@ -6,12 +6,29 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/21 18:31:08 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/22 19:15:58 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include <stdio.h>
+
+void	ft_display_ways(t_way *way)
+{
+	int i;
+
+	i = 0;
+	while (way)
+	{
+		while (way->tab[i])
+		{
+			printf("%s ", way->tab[i]);
+			i++;
+		}
+		printf("is a way\n");
+		way = way->next;
+	}
+}
 
 int		ft_connect(t_lemin *data, char *name)
 {
@@ -41,18 +58,17 @@ void	ft_save_way(t_lemin *data)
 		exit(EXIT_FAILURE);
 	if (!(data->way->tab = ft_memalloc(sizeof(char*) * (data->weight - 1))))
 		exit(EXIT_FAILURE);
-	while (data->weight--)
+	while (data->weight-- > 1)
 	{
 		data->p = data->list;
 		while (data->p && !((data->p->weight == data->weight)
 		&& ft_connect(data, data->p->name)))
 			data->p = data->p->next;
-		printf("%s\n", data->p->name);
 		if (data->p && !(data->way->tab[data->i++] = ft_strdup(data->p->name)))
 			exit(EXIT_FAILURE);
 		data->name = data->p->name;
-		printf("ok\n");
 	}
+	data->way->next = NULL;
 }
 
 void	ft_put_weight(t_lemin *data, char *name, int weight)
@@ -109,5 +125,5 @@ void	ft_process(t_lemin *data)
 	ft_process_weight(data);
 	data->l = data->way;
 	ft_save_way(data);
-	printf("end of process\n");
+	ft_display_ways(data->way);
 }
