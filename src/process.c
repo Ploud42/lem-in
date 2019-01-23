@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/22 19:15:58 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/01/23 18:01:39 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_display_ways(t_way *way)
 	int i;
 
 	i = 0;
+	if (!way)
+		ft_putendl("no way : ERROR");
 	while (way)
 	{
 		while (way->tab[i])
@@ -27,6 +29,29 @@ void	ft_display_ways(t_way *way)
 		}
 		printf("is a way\n");
 		way = way->next;
+	}
+}
+
+void	ft_delete_way(t_lemin *data)
+{
+	data->i = 0;
+	if (!data->way)
+		return ;
+	while (data->way && data->way->tab[data->i] && data->way->tab[data->i + 1])
+	{
+		data->t = data->links;
+		printf("ok\n");
+		while (data->t)
+		{
+			if (!ft_strcmp(data->way->tab[data->i], data->t->name1) ||
+			!ft_strcmp(data->way->tab[data->i++], data->t->name2))
+			{
+				data->t = data->t->next;
+				//ft_free_link(data);
+			}
+			else
+				data->t = data->t->next;
+		}
 	}
 }
 
@@ -46,17 +71,17 @@ int		ft_connect(t_lemin *data, char *name)
 	return (0);
 }
 
-void	ft_save_way(t_lemin *data)
+int		ft_save_way(t_lemin *data)
 {
 	data->p = data->list;
 	data->i = 0;
-	while (data->p && data->p->value != START)
-		data->p = data->p->next;
-	data->weight = data->p->weight;
-	data->name = data->p->name;
-	if (!(data->way = ft_memalloc(sizeof(t_way))))
+	if (!data->start->weight)
+		return (0);
+	data->weight = data->start->weight;
+	data->name = data->start->name;
+	if (!(data->l = ft_memalloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
-	if (!(data->way->tab = ft_memalloc(sizeof(char*) * (data->weight - 1))))
+	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight - 1))))
 		exit(EXIT_FAILURE);
 	while (data->weight-- > 1)
 	{
@@ -64,11 +89,13 @@ void	ft_save_way(t_lemin *data)
 		while (data->p && !((data->p->weight == data->weight)
 		&& ft_connect(data, data->p->name)))
 			data->p = data->p->next;
-		if (data->p && !(data->way->tab[data->i++] = ft_strdup(data->p->name)))
+		if (data->p && !(data->l->tab[data->i++] = ft_strdup(data->p->name)))
 			exit(EXIT_FAILURE);
 		data->name = data->p->name;
 	}
-	data->way->next = NULL;
+	data->l->next = data->way;
+	data->way = data->l;
+	return (1);
 }
 
 void	ft_put_weight(t_lemin *data, char *name, int weight)
@@ -82,10 +109,7 @@ void	ft_put_weight(t_lemin *data, char *name, int weight)
 		(!l->weight || l->weight > (weight + 1)))
 		{
 			l->weight = weight + 1;
-			if (l->value == START)
-				data->flag = START;
-			else
-				data->flag = 1;
+			data->flag = 1;
 			return ;
 		}
 		l = l->next;
@@ -112,7 +136,7 @@ void	ft_process_weight(t_lemin *data)
 		}
 		data->p = data->p->next;
 	}
-	if (data->flag == START)
+	if (data->start->weight)
 		return ;
 	data->weight++;
 	if (data->flag)
@@ -123,7 +147,10 @@ void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
 	ft_process_weight(data);
-	data->l = data->way;
+	printf("weight processed\n");
 	ft_save_way(data);
+	printf("way saved\n");
+	ft_delete_way(data);
+	printf("way deleted\n");
 	ft_display_ways(data->way);
 }

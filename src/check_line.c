@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/21 17:18:08 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/23 16:26:11 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ int			ft_check_name(t_lemin *data, char *name)
 	i = 1;
 	while (p)
 	{
-		if (p->value == START)
-			data->start = ft_strdup(p->name);
-		else if (p->value == END)
-		{
-			data->end = ft_strdup(p->name);
-			p->weight = 1;
-		}
 		if (!ft_strcmp(p->name, name))
 			return (i);
 		p = p->next;
@@ -86,30 +79,31 @@ static void ft_creat_links(t_lemin *data)
 
 static void	ft_creat_node(t_lemin *data)
 {
-	t_node	*new;
-
-	data->i = -1;
 	data->tab = ft_strsplit(data->line, ' ');
-	data->name = data->tab[0];
-	if (!ft_check_name(data, data->name))
+	if (!ft_check_name(data, data->tab[0]))
 	{
-		if (!(new = ft_memalloc(sizeof(t_node))))
+		if (!(data->p = ft_memalloc(sizeof(t_node))))
 			ft_exception("ERROR");
-		new->next = data->list;
-		data->list = new;
-		if (!(new->name = ft_strdup(data->name)))
+		data->p->next = data->list;
+		data->list = data->p;
+		if (!(data->p->name = ft_strdup(data->tab[0])))
 			ft_exception("ERROR");
-		new->x = ft_atoi(data->tab[1]);
-		new->y = ft_atoi(data->tab[2]);
-		new->weight = 0;
-		new->value = data->value;
+		data->p->x = ft_atoi(data->tab[1]);
+		data->p->y = ft_atoi(data->tab[2]);
+		data->p->weight = 0;
+		data->p->value = data->value;
 		data->value = 0;
+		if (data->p->value == START)
+			data->start = data->p;
+		else if (data->p->value == END)
+		{
+			data->end = data->p;
+			data->p->weight = 1;
+		}
 	}
 	else
 		ft_exception("ERROR");
-	while (data->tab[++data->i])
-		free(data->tab[data->i]);
-	free(data->tab);
+	ft_free_tab(data->tab);
 }
 
 int			ft_check_line(t_lemin *data)
