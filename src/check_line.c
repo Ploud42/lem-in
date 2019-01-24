@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/23 16:26:11 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/24 18:54:56 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,21 @@ int			ft_check_name(t_lemin *data, char *name)
 
 static void ft_creat_links(t_lemin *data)
 {
-	t_link	*new;
-
-	data->i = -1;
 	data->tab = ft_strsplit(data->line, '-');
 	if (ft_check_name(data, data->tab[0]) && ft_check_name(data, data->tab[1]))
 	{
-		if (!(new = ft_memalloc(sizeof(t_link))))
+		if (!(data->t = malloc(sizeof(t_link))))
 			ft_exception("ERROR");
-		new->next = data->links;
-		data->links = new;
-		if (!(new->name1 = ft_strdup(data->tab[0])))
+		data->t->next = data->links;
+		data->links = data->t;
+		if (!(data->t->name1 = ft_strdup(data->tab[0])))
 			ft_exception("ERROR");
-		if (!(new->name2 = ft_strdup(data->tab[1])))
+		if (!(data->t->name2 = ft_strdup(data->tab[1])))
 			ft_exception("ERROR");
 	}
 	else
 		ft_exception("ERROR");
-	while (data->tab[++data->i])
-		free(data->tab[data->i]);
-	free(data->tab);
+	ft_free_tab(data->tab);
 }
 
 static void	ft_creat_node(t_lemin *data)
@@ -82,7 +77,7 @@ static void	ft_creat_node(t_lemin *data)
 	data->tab = ft_strsplit(data->line, ' ');
 	if (!ft_check_name(data, data->tab[0]))
 	{
-		if (!(data->p = ft_memalloc(sizeof(t_node))))
+		if (!(data->p = malloc(sizeof(t_node))))
 			ft_exception("ERROR");
 		data->p->next = data->list;
 		data->list = data->p;

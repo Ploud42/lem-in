@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/23 18:01:39 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/24 19:34:17 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,17 @@ void	ft_delete_way(t_lemin *data)
 	while (data->way && data->way->tab[data->i] && data->way->tab[data->i + 1])
 	{
 		data->t = data->links;
-		printf("ok\n");
 		while (data->t)
 		{
 			if (!ft_strcmp(data->way->tab[data->i], data->t->name1) ||
-			!ft_strcmp(data->way->tab[data->i++], data->t->name2))
+			!ft_strcmp(data->way->tab[data->i], data->t->name2))
 			{
-				data->t = data->t->next;
-				//ft_free_link(data);
+				ft_free_link(data);
 			}
 			else
 				data->t = data->t->next;
 		}
+		data->i++;
 	}
 }
 
@@ -79,9 +78,9 @@ int		ft_save_way(t_lemin *data)
 		return (0);
 	data->weight = data->start->weight;
 	data->name = data->start->name;
-	if (!(data->l = ft_memalloc(sizeof(t_way))))
+	if (!(data->l = malloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
-	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight - 1))))
+	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight))))
 		exit(EXIT_FAILURE);
 	while (data->weight-- > 1)
 	{
@@ -147,10 +146,10 @@ void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
 	ft_process_weight(data);
-	printf("weight processed\n");
+	if (!data->start->weight)
+		ft_exception("ERROR");
 	ft_save_way(data);
-	printf("way saved\n");
 	ft_delete_way(data);
-	printf("way deleted\n");
 	ft_display_ways(data->way);
+	ft_display_links(data->links);
 }
