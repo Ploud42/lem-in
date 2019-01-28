@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 16:24:15 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/24 18:49:31 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/28 16:56:02 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_free_link(t_lemin *data)
 			temp = temp->next;
 		temp->next = data->t->next;
 	}
-	printf("ok\n");
 	free(data->t->name1);
 	free(data->t->name2);
 	free(data->t);

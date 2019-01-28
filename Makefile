@@ -6,7 +6,7 @@
 #    By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 16:22:42 by jsobel            #+#    #+#              #
-#    Updated: 2019/01/23 16:27:31 by jsobel           ###   ########.fr        #
+#    Updated: 2019/01/28 15:11:35 by jsobel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC =		main.c			\
 			get_next_line.c	\
 			check_line.c	\
 			process.c		\
-			util.c
+			util.c			\
+			process_next.c
 
 OBJ		= $(addprefix ./obj/,$(SRC:.c=.o))
 

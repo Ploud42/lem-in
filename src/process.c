@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/24 19:34:17 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/28 18:42:19 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,18 @@ void	ft_display_ways(t_way *way)
 {
 	int i;
 
-	i = 0;
 	if (!way)
 		ft_putendl("no way : ERROR");
 	while (way)
 	{
+		i = 0;
 		while (way->tab[i])
 		{
-			printf("%s ", way->tab[i]);
+			printf("- %s ", way->tab[i]);
 			i++;
 		}
 		printf("is a way\n");
 		way = way->next;
-	}
-}
-
-void	ft_delete_way(t_lemin *data)
-{
-	data->i = 0;
-	if (!data->way)
-		return ;
-	while (data->way && data->way->tab[data->i] && data->way->tab[data->i + 1])
-	{
-		data->t = data->links;
-		while (data->t)
-		{
-			if (!ft_strcmp(data->way->tab[data->i], data->t->name1) ||
-			!ft_strcmp(data->way->tab[data->i], data->t->name2))
-			{
-				ft_free_link(data);
-			}
-			else
-				data->t = data->t->next;
-		}
-		data->i++;
 	}
 }
 
@@ -146,10 +124,43 @@ void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
 	ft_process_weight(data);
+	if (data->start->weight)
+		data->ww += (data->start->weight - 2);
+	while (data->start->weight && data->ww <= data->ants)
+	{
+		ft_display_node(data->list, 1);
+		if (!data->start->weight && !data->way)
+			ft_exception("ERROR");
+		if (ft_save_way(data))
+			ft_delete_way(data);
+		ft_display_ways(data->way);
+		ft_reset_weight(data->list);
+		data->weight = 1;
+		ft_process_weight(data);
+		data->ww += (data->start->weight - 2);
+	}
+	//ft_display_node(data->list, 1);
+	//ft_display_ways(data->way);
+	//ft_display_links(data->links);
+}
+
+/*void	ft_process(t_lemin *data)
+{
+	data->weight = 1;
+	ft_process_weight(data);
+	ft_display_node(data->list, 1);
 	if (!data->start->weight)
 		ft_exception("ERROR");
 	ft_save_way(data);
 	ft_delete_way(data);
 	ft_display_ways(data->way);
+	data->ww = data->start->weight;
+	data->weight = 1;
+	ft_reset_weight(data->list);
+	ft_process_weight(data);
+	if ((data->start->weight - data->ww + 1) < data->ants && ft_save_way(data))
+			ft_delete_way(data);
+	ft_display_node(data->list, 1);
+	ft_display_ways(data->way);
 	ft_display_links(data->links);
-}
+}*/
