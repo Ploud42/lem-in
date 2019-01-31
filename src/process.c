@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/28 18:42:19 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/01/31 18:25:50 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,20 +124,22 @@ void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
 	ft_process_weight(data);
-	if (data->start->weight)
-		data->ww += (data->start->weight - 2);
-	while (data->start->weight && data->ww <= data->ants)
+	data->ww = (data->start->weight - 2);
+	data->lignemax = (data->ww + data->ants);
+	while (data->start->weight && data->ants > 0)
 	{
 		ft_display_node(data->list, 1);
 		if (!data->start->weight && !data->way)
 			ft_exception("ERROR");
-		if (ft_save_way(data))
+		data->ww = (data->start->weight - 2);
+		if (data->lignemax >= (data->ww + 1) && data->ants && ft_save_way(data))
 			ft_delete_way(data);
+		data->lignemax = (data->ww + data->ants);
+		data->ants =  data->ants - data->ww;
 		ft_display_ways(data->way);
 		ft_reset_weight(data->list);
 		data->weight = 1;
 		ft_process_weight(data);
-		data->ww += (data->start->weight - 2);
 	}
 	//ft_display_node(data->list, 1);
 	//ft_display_ways(data->way);
