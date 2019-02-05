@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 16:14:05 by jsobel            #+#    #+#             */
-/*   Updated: 2018/04/19 18:56:17 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:23:12 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char		**ft_strsplit(char const *str, char c)
 	if (!str)
 		return (NULL);
 	nb = compte_mots(str, c);
-	if (!(tab = malloc(sizeof(char*) * (nb + 1))))
+	if (!(tab = malloc(sizeof(char **) * (nb + 1))))
 		return (NULL);
 	tab[nb] = 0;
 	while (i < nb)

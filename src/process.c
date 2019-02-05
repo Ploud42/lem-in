@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/31 18:25:50 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:25:10 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_display_ways(t_way *way)
 		i = 0;
 		while (way->tab[i])
 		{
-			printf("- %s ", way->tab[i]);
+			printf("- %s_%d ", way->tab[i], way->lenght);
 			i++;
 		}
 		printf("is a way\n");
@@ -58,8 +58,11 @@ int		ft_save_way(t_lemin *data)
 	data->name = data->start->name;
 	if (!(data->l = malloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
-	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight))))
+	if (!(data->l->tab = ft_memalloc(sizeof(char **) * (data->weight))))
 		exit(EXIT_FAILURE);
+	data->l->lenght = data->weight - 1;
+	data->l->lants = data->l->lenght;
+	ft_display_node(data->list, 1);
 	while (data->weight-- > 1)
 	{
 		data->p = data->list;
@@ -124,26 +127,28 @@ void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
 	ft_process_weight(data);
-	data->ww = (data->start->weight - 2);
-	data->lignemax = (data->ww + data->ants);
-	while (data->start->weight && data->ants > 0)
+	if (data->start->weight && ft_save_way(data))
+		ft_delete_way(data);
+	data->lignemax = data->start->weight - 1 + data->ants;
+	data->weight = 1;
+	ft_reset_weight(data);
+	ft_process_weight(data);
+	ft_display_node(data->list, 1);
+	printf("before loop\n");
+	while (data->start->weight && ft_lignemax(data) > data->start->weight)
 	{
 		ft_display_node(data->list, 1);
-		if (!data->start->weight && !data->way)
-			ft_exception("ERROR");
-		data->ww = (data->start->weight - 2);
-		if (data->lignemax >= (data->ww + 1) && data->ants && ft_save_way(data))
+		printf("\nok start weight = %d\n", data->start->weight);
+		if (ft_save_way(data))
 			ft_delete_way(data);
-		data->lignemax = (data->ww + data->ants);
-		data->ants =  data->ants - data->ww;
-		ft_display_ways(data->way);
-		ft_reset_weight(data->list);
+		printf("ok\n");
+		ft_reset_weight(data);
 		data->weight = 1;
 		ft_process_weight(data);
 	}
-	//ft_display_node(data->list, 1);
-	//ft_display_ways(data->way);
-	//ft_display_links(data->links);
+	if (!data->start->weight && !data->way)
+		ft_exception("ERROR");
+	ft_display_ways(data->way);
 }
 
 /*void	ft_process(t_lemin *data)
