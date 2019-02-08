@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 16:24:15 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/28 16:56:02 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:41:29 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ void	ft_free_link(t_lemin *data)
 			temp = temp->next;
 		temp->next = data->t->next;
 	}
-	free(data->t->name1);
-	free(data->t->name2);
-	free(data->t);
+	//free(data->t->name1);
+	//free(data->t->name2);
+	//free(data->t);
 	if (temp)
 		data->t = temp->next;
 	else
 		data->t = data->links;
 }
 
-void	ft_free_tab(char **tab)
+void	ft_free_tab(t_lemin *data)
 {
 	int i;
 
 	i = 0;
-	while (tab[i])
+	while (data->tab[i])
 	{
-		free(tab[i]);
+		free(data->tab[i]);
 		i++;
 	}
-	free(tab);
-	tab = NULL;
+	free(data->tab);
+	data->tab = NULL;
 }

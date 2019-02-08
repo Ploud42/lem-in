@@ -6,11 +6,12 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:11:19 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/05 18:01:34 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/07 19:11:10 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+#include<stdio.h>
 
 int		ft_lignemax(t_lemin *data)
 {
@@ -25,19 +26,20 @@ int		ft_lignemax(t_lemin *data)
 	}
 	data->l = data->way;
 	data->flag = 0;
-	while (data->i-- && data->way)
+	while (data->i && data->l)
 	{
-		if (data->l->lants < data->lignemax && data->l->lants++)
+		if (data->l->lants < data->lignemax && data->i-- && data->l->lants++)
 			data->flag = 1;
 		if (data->l->next)
 			data->l = data->l->next;
 		else
 		{
-			if (!data->flag && data->lignemax++ && data->l->lants++)
+			if (!data->flag && data->i && data->lignemax++)
 				data->flag = 0;
 			data->l = data->way;
 		}
 	}
+	printf("lignemax = %d\n", data->lignemax);
 	return (data->lignemax);
 }
 
@@ -49,6 +51,7 @@ void	ft_delete_way(t_lemin *data)
 	while (data->way && data->way->tab[data->i] && data->way->tab[data->i + 1])
 	{
 		data->t = data->links;
+		printf("%s\n", data->way->tab[data->i]);
 		while (data->t)
 		{
 			if (!ft_strcmp(data->way->tab[data->i], data->t->name1) ||

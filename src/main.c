@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/28 18:33:58 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/06 18:09:27 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(void)
 	data.value = 0;
 	data.ants = 0;
 	data.i = 0;
-	data.tab = 0;
+	data.tab = NULL;
 	data.ww = 0;
 	while (get_next_line(0, &data.line) > 0 && ft_check_line(&data))
 		ft_putendl(data.line);

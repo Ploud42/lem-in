@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/05 17:59:24 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:05:41 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct		s_lemin
 }					t_lemin;
 
 void				ft_free_link(t_lemin *data);
-void				ft_free_tab(char **tab);
+void				ft_free_tab(t_lemin *data);
 
 int					ft_lignemax(t_lemin *data);
 void				ft_delete_way(t_lemin *data);

@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/05 19:25:10 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:11:31 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int		ft_save_way(t_lemin *data)
 	data->name = data->start->name;
 	if (!(data->l = malloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
-	if (!(data->l->tab = ft_memalloc(sizeof(char **) * (data->weight))))
+	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight + 1))))
 		exit(EXIT_FAILURE);
+	printf("right after malloc\n");
+	ft_display_links(data->links);
 	data->l->lenght = data->weight - 1;
 	data->l->lants = data->l->lenght;
-	ft_display_node(data->list, 1);
 	while (data->weight-- > 1)
 	{
 		data->p = data->list;
@@ -133,8 +134,7 @@ void	ft_process(t_lemin *data)
 	data->weight = 1;
 	ft_reset_weight(data);
 	ft_process_weight(data);
-	ft_display_node(data->list, 1);
-	printf("before loop\n");
+	printf("before loop start weight = %d\n", data->start->weight);
 	while (data->start->weight && ft_lignemax(data) > data->start->weight)
 	{
 		ft_display_node(data->list, 1);
