@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/08 18:57:05 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/11 18:16:47 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_data
 typedef	struct		s_way
 {
 	char			**tab;
+	int				*place;
 	int				lenght;
 	int				lants;
 	struct s_way	*next;

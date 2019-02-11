@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/08 18:57:22 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/11 18:11:30 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int		main(void)
 	ft_process(&data);
 	ft_display_node(data.list, 1);
 	printf("%d fourmis\n", data.ants);
+	//ft_display_lines(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/08 18:57:45 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/11 18:59:42 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int		ft_save_way(t_lemin *data)
 		exit(EXIT_FAILURE);
 	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight + 1))))
 		exit(EXIT_FAILURE);
-	ft_display_links(data->links);
+	if (!(data->l->place = ft_memalloc(sizeof(int) * (data->weight))))
+		exit(EXIT_FAILURE);
 	data->l->lenght = data->weight - 1;
 	data->l->lants = data->l->lenght;
 	while (data->weight-- > 1)
@@ -73,7 +74,6 @@ int		ft_save_way(t_lemin *data)
 	}
 	data->l->next = data->way;
 	data->way = data->l;
-	data->wnbr++;
 	return (1);
 }
 
@@ -127,7 +127,7 @@ void	ft_process(t_lemin *data)
 	data->weight = 1;
 	data->wnbr = 0;
 	ft_process_weight(data);
-	if (data->start->weight && ft_save_way(data))
+	if (data->start->weight && ft_save_way(data) && ++data->wnbr)
 		ft_delete_way(data);
 	data->lignemax = data->start->weight - 1 + data->ants;
 	data->weight = 1;
@@ -136,7 +136,7 @@ void	ft_process(t_lemin *data)
 	while (data->start->weight && ft_lignemax(data) > data->start->weight &&
 	data->wnbr <= data->ants)
 	{
-		if (data->start->weight && ft_save_way(data))
+		if (data->start->weight && ft_save_way(data) && ++data->wnbr)
 			ft_delete_way(data);
 		ft_reset_weight(data);
 		data->weight = 1;
