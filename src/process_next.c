@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:11:19 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/07 19:11:10 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/08 17:37:46 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int		ft_lignemax(t_lemin *data)
 			data->l = data->l->next;
 		else
 		{
-			if (!data->flag && data->i && data->lignemax++)
-				data->flag = 0;
+			if (!data->flag && data->i)
+				data->lignemax++;
+			data->flag = 0;
 			data->l = data->way;
 		}
 	}
@@ -51,7 +52,6 @@ void	ft_delete_way(t_lemin *data)
 	while (data->way && data->way->tab[data->i] && data->way->tab[data->i + 1])
 	{
 		data->t = data->links;
-		printf("%s\n", data->way->tab[data->i]);
 		while (data->t)
 		{
 			if (!ft_strcmp(data->way->tab[data->i], data->t->name1) ||

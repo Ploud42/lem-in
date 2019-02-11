@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/06 19:05:41 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/08 18:57:05 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct		s_lemin
 	int				i;
 	int				value;
 	int				weight;
-	int				ww;
+	int				wnbr;
 	int				lignemax;
 	int				flag;
 	char			**tab;

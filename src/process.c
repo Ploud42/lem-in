@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/06 19:11:31 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/08 18:57:45 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,12 @@ int		ft_save_way(t_lemin *data)
 {
 	data->p = data->list;
 	data->i = 0;
-	if (!data->start->weight)
-		return (0);
 	data->weight = data->start->weight;
 	data->name = data->start->name;
 	if (!(data->l = malloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
 	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight + 1))))
 		exit(EXIT_FAILURE);
-	printf("right after malloc\n");
 	ft_display_links(data->links);
 	data->l->lenght = data->weight - 1;
 	data->l->lants = data->l->lenght;
@@ -76,6 +73,7 @@ int		ft_save_way(t_lemin *data)
 	}
 	data->l->next = data->way;
 	data->way = data->l;
+	data->wnbr++;
 	return (1);
 }
 
@@ -127,6 +125,7 @@ void	ft_process_weight(t_lemin *data)
 void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
+	data->wnbr = 0;
 	ft_process_weight(data);
 	if (data->start->weight && ft_save_way(data))
 		ft_delete_way(data);
@@ -134,14 +133,11 @@ void	ft_process(t_lemin *data)
 	data->weight = 1;
 	ft_reset_weight(data);
 	ft_process_weight(data);
-	printf("before loop start weight = %d\n", data->start->weight);
-	while (data->start->weight && ft_lignemax(data) > data->start->weight)
+	while (data->start->weight && ft_lignemax(data) > data->start->weight &&
+	data->wnbr <= data->ants)
 	{
-		ft_display_node(data->list, 1);
-		printf("\nok start weight = %d\n", data->start->weight);
-		if (ft_save_way(data))
+		if (data->start->weight && ft_save_way(data))
 			ft_delete_way(data);
-		printf("ok\n");
 		ft_reset_weight(data);
 		data->weight = 1;
 		ft_process_weight(data);
@@ -149,6 +145,7 @@ void	ft_process(t_lemin *data)
 	if (!data->start->weight && !data->way)
 		ft_exception("ERROR");
 	ft_display_ways(data->way);
+	printf("lignemax = %d\n", data->lignemax);
 }
 
 /*void	ft_process(t_lemin *data)
