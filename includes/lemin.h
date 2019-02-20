@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/11 18:16:47 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:39:27 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ typedef struct		s_lemin
 	int				flag;
 	char			**tab;
 }					t_lemin;
+
+void				ft_gogo(t_lemin *data);
+void				ft_display_places(t_lemin *data);
+void				ft_display_lines(t_lemin *data);
 
 void				ft_free_link(t_lemin *data);
 void				ft_free_tab(t_lemin *data);

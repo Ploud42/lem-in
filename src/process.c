@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/11 18:59:42 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/20 18:49:45 by juliensobel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void	ft_process(t_lemin *data)
 		ft_exception("ERROR");
 	ft_display_ways(data->way);
 	printf("lignemax = %d\n", data->lignemax);
+	ft_lignemax(data);
 }
 
 /*void	ft_process(t_lemin *data)
