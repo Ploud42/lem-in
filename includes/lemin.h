@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/20 17:39:27 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/21 18:53:18 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef	struct		s_way
 typedef struct		s_node
 {
 	char			*name;
-	int				x;
-	int				y;
 	int				value;
 	int				weight;
 	struct s_node	*next;
@@ -54,6 +52,7 @@ typedef struct		s_node
 
 typedef struct		s_link
 {
+	char			**tab;
 	char			*name1;
 	char			*name2;
 	struct s_link	*next;
@@ -80,6 +79,9 @@ typedef struct		s_lemin
 	int				flag;
 	char			**tab;
 }					t_lemin;
+
+void				ft_free_next(t_lemin *data);
+void				ft_free_lemin(t_lemin *data);
 
 void				ft_gogo(t_lemin *data);
 void				ft_display_places(t_lemin *data);

@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:05:57 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/20 18:53:37 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/21 16:03:33 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_display_places(t_lemin *data)
 		i = 0;
 		while (i < data->l->lenght)
 		{
-			//printf("i = %d, lenght = %d\n", i, data->l->lenght);
 			if (data->l->place[i])
 			{
 				if (data->flag)

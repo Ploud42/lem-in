@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/08 17:19:36 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/21 18:54:19 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void		ft_display_node(t_node *list, int weight)
 	{
 		ft_putstr(list->name);
 		write(1, " ", 1);
-		ft_putnbr(list->x);
+		//ft_putnbr(list->x);
 		write(1, " ", 1);
-		ft_putnbr(list->y);
+		//ft_putnbr(list->y);
 		if (list->value == START)
 			ft_putstr(" start\n");
 		else if (list->value == END)
@@ -55,21 +55,20 @@ int			ft_check_name(t_lemin *data, char *name)
 
 static void ft_creat_links(t_lemin *data)
 {
-	data->tab = ft_strsplit(data->line, '-');
+	if (!(data->tab = ft_strsplit(data->line, '-')))
+		ft_exception("ERROR");
 	if (ft_check_name(data, data->tab[0]) && ft_check_name(data, data->tab[1]))
 	{
 		if (!(data->t = malloc(sizeof(t_link))))
 			ft_exception("ERROR");
 		data->t->next = data->links;
 		data->links = data->t;
-		if (!(data->t->name1 = ft_strdup(data->tab[0])))
-			ft_exception("ERROR");
-		if (!(data->t->name2 = ft_strdup(data->tab[1])))
-			ft_exception("ERROR");
+		data->t->tab = data->tab;
+		data->t->name1 = data->t->tab[0];
+		data->t->name2 = data->t->tab[1];
 	}
 	else
 		ft_exception("ERROR");
-	//ft_free_tab(data);
 }
 
 static void	ft_creat_node(t_lemin *data)
@@ -83,8 +82,6 @@ static void	ft_creat_node(t_lemin *data)
 		data->list = data->p;
 		if (!(data->p->name = ft_strdup(data->tab[0])))
 			ft_exception("ERROR");
-		data->p->x = ft_atoi(data->tab[1]);
-		data->p->y = ft_atoi(data->tab[2]);
 		data->p->weight = 0;
 		data->p->value = data->value;
 		data->value = 0;
@@ -98,7 +95,7 @@ static void	ft_creat_node(t_lemin *data)
 	}
 	else
 		ft_exception("ERROR");
-	//ft_free_tab(data);
+	ft_free_tab(data);
 }
 
 int			ft_check_line(t_lemin *data)
