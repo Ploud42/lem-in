@@ -6,12 +6,38 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 16:24:15 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/08 17:21:23 by juliensobel      ###   ########.fr       */
+/*   Updated: 2019/02/22 18:53:37 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
+
+int		ft_tablen(char **tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+int		ft_strisdigit(char *str)
+{
+	int i;
+	int c;
+
+	i = 0;
+	while (str[i])
+	{
+		c = str[i];
+		if (!(c >= 48 && c <= 57))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	ft_free_link(t_lemin *data)
 {

@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/21 18:53:18 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/22 18:53:35 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void				ft_gogo(t_lemin *data);
 void				ft_display_places(t_lemin *data);
 void				ft_display_lines(t_lemin *data);
 
+int					ft_tablen(char **tab);
+int					ft_strisdigit(char *str);
 void				ft_free_link(t_lemin *data);
 void				ft_free_tab(t_lemin *data);
 

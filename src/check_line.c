@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/21 18:54:19 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/22 19:20:39 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ int			ft_check_name(t_lemin *data, char *name)
 	return (0);
 }
 
-static void ft_creat_links(t_lemin *data)
+static int	ft_creat_links(t_lemin *data)
 {
 	if (!(data->tab = ft_strsplit(data->line, '-')))
 		ft_exception("ERROR");
-	if (ft_check_name(data, data->tab[0]) && ft_check_name(data, data->tab[1]))
+	if (ft_tablen(data->tab) == 2 && ft_check_name(data, data->tab[0]) &&
+	ft_check_name(data, data->tab[1]))
 	{
 		if (!(data->t = malloc(sizeof(t_link))))
 			ft_exception("ERROR");
@@ -66,15 +67,17 @@ static void ft_creat_links(t_lemin *data)
 		data->t->tab = data->tab;
 		data->t->name1 = data->t->tab[0];
 		data->t->name2 = data->t->tab[1];
+		return (1);
 	}
 	else
-		ft_exception("ERROR");
+		return (0);
 }
 
 static void	ft_creat_node(t_lemin *data)
 {
 	data->tab = ft_strsplit(data->line, ' ');
-	if (!ft_check_name(data, data->tab[0]))
+	if (!ft_check_name(data, data->tab[0]) && ft_tablen(data->tab) == 3 &&
+	ft_strisdigit(data->tab[1]) && ft_strisdigit(data->tab[2]))
 	{
 		if (!(data->p = malloc(sizeof(t_node))))
 			ft_exception("ERROR");
@@ -102,12 +105,7 @@ int			ft_check_line(t_lemin *data)
 {
 	if (!data->ants && data->line[0] != '#' && data->line[0] != 'L')
 	{
-		while (data->line[data->i])
-		{
-			if (!ft_isdigit(data->line[data->i++]))
-				ft_exception("ERROR");
-		}
-		if (!(data->ants = ft_atoi(data->line)))
+		if (!ft_strisdigit(data->line) || !(data->ants = ft_atoi(data->line)))
 			ft_exception("ERROR");
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
@@ -122,7 +120,7 @@ int			ft_check_line(t_lemin *data)
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
 	ft_strchr(data->line, '-'))
-		ft_creat_links(data);
+		return (ft_creat_links(data));
 	else if (!(data->line[0] == '#'))
 		return (0);
 	return (1);
