@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:09:36 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/21 18:51:43 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/27 19:41:12 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_free_next(t_lemin *data)
 		data->way = data->way->next;
 		free(data->l);
 	}
+	if (data->line)
+		free(data->line);
 }
 
 void	ft_free_lemin(t_lemin *data)
@@ -32,6 +34,7 @@ void	ft_free_lemin(t_lemin *data)
 	while (data->list)
 	{
 		free(data->list->name);
+		data->list = NULL;
 		data->p = data->list;
 		data->list = data->list->next;
 		free(data->p);

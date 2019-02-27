@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/22 19:20:39 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/27 19:17:54 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ static int	ft_creat_links(t_lemin *data)
 		return (1);
 	}
 	else
+	{
+		ft_free_tab(data);
 		return (0);
+	}
 }
 
 static void	ft_creat_node(t_lemin *data)
@@ -79,6 +82,7 @@ static void	ft_creat_node(t_lemin *data)
 	if (!ft_check_name(data, data->tab[0]) && ft_tablen(data->tab) == 3 &&
 	ft_strisdigit(data->tab[1]) && ft_strisdigit(data->tab[2]))
 	{
+		printf("tab[2] = %s\n", data->tab[2]);
 		if (!(data->p = malloc(sizeof(t_node))))
 			ft_exception("ERROR");
 		data->p->next = data->list;
@@ -119,7 +123,7 @@ int			ft_check_line(t_lemin *data)
 			data->value = END;
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
-	ft_strchr(data->line, '-'))
+	ft_strchr(data->line, '-') == ft_strrchr(data->line, '-'))
 		return (ft_creat_links(data));
 	else if (!(data->line[0] == '#'))
 		return (0);

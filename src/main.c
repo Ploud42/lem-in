@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/22 19:00:06 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/27 19:12:03 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ int		main(void)
 	data.i = 0;
 	data.tab = NULL;
 	while (get_next_line(0, &data.line) > 0 && ft_check_line(&data))
+	{
 		ft_putendl(data.line);
+		free(data.line);
+		data.line = NULL;
+	}
 	if (!data.start || !data.end)
 		ft_exception("ERROR");
 	//ft_display_node(data.list, 0);

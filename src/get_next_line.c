@@ -6,13 +6,13 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:04:13 by jsobel            #+#    #+#             */
-/*   Updated: 2019/01/07 18:30:36 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/02/27 17:54:40 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void	ft_free(int fd, t_data **l)
+static void		ft_free(int fd, t_data **l)
 {
 	t_data	*f;
 
@@ -28,7 +28,7 @@ void	ft_free(int fd, t_data **l)
 		ft_free(fd, &(*l)->next);
 }
 
-int		ft_read_buf(int flag, char *buf, t_data **p, int len)
+static int		ft_read_buf(int flag, char *buf, t_data **p, int len)
 {
 	int		i;
 	char	*link;
@@ -57,7 +57,7 @@ int		ft_read_buf(int flag, char *buf, t_data **p, int len)
 	return (flag);
 }
 
-int		ft_reader(const int fd, t_data **p)
+static int		ft_reader(const int fd, t_data **p)
 {
 	int		i;
 	int		flag;
@@ -84,7 +84,7 @@ int		ft_reader(const int fd, t_data **p)
 	return (len > 0);
 }
 
-t_data	*ft_set_p(const int fd, t_data **l)
+static t_data	*ft_set_p(const int fd, t_data **l)
 {
 	if ((*l) && (*l)->index != fd)
 		return (ft_set_p(fd, &(*l)->next));
@@ -105,7 +105,7 @@ t_data	*ft_set_p(const int fd, t_data **l)
 	}
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_data	*l;
 	t_data			*p;
