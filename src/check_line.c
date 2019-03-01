@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/27 19:17:54 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/01 19:28:10 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static int	ft_creat_links(t_lemin *data)
 {
 	if (!(data->tab = ft_strsplit(data->line, '-')))
 		ft_exception("ERROR");
+	printf("tab[1] = '%s' et tablen = %d\n",
+	data->tab[1],ft_tablen(data->tab));
 	if (ft_tablen(data->tab) == 2 && ft_check_name(data, data->tab[0]) &&
 	ft_check_name(data, data->tab[1]))
 	{
@@ -64,9 +66,14 @@ static int	ft_creat_links(t_lemin *data)
 			ft_exception("ERROR");
 		data->t->next = data->links;
 		data->links = data->t;
-		data->t->tab = data->tab;
-		data->t->name1 = data->t->tab[0];
-		data->t->name2 = data->t->tab[1];
+		if (!(data->t->name1 = ft_strdup(data->tab[0])))
+			exit(EXIT_FAILURE);
+		if (!(data->t->name2 = ft_strdup(data->tab[1])))
+			exit(EXIT_FAILURE);
+		free(data->tab[0]);
+		free(data->tab[1]);
+		//free(data->tab);
+		data->tab = NULL;
 		return (1);
 	}
 	else
@@ -82,7 +89,6 @@ static void	ft_creat_node(t_lemin *data)
 	if (!ft_check_name(data, data->tab[0]) && ft_tablen(data->tab) == 3 &&
 	ft_strisdigit(data->tab[1]) && ft_strisdigit(data->tab[2]))
 	{
-		printf("tab[2] = %s\n", data->tab[2]);
 		if (!(data->p = malloc(sizeof(t_node))))
 			ft_exception("ERROR");
 		data->p->next = data->list;

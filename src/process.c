@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/21 17:31:11 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/01 19:24:54 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		ft_save_way(t_lemin *data)
 	data->name = data->start->name;
 	if (!(data->l = malloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
-	if (!(data->l->tab = ft_memalloc(sizeof(char*) * (data->weight + 1))))
+	if (!(data->l->tab = ft_memalloc(sizeof(char *) * (data->weight + 1))))
 		exit(EXIT_FAILURE);
 	if (!(data->l->place = ft_memalloc(sizeof(int) * (data->weight))))
 		exit(EXIT_FAILURE);
@@ -142,6 +142,7 @@ void	ft_process(t_lemin *data)
 		data->weight = 1;
 		ft_process_weight(data);
 	}
+	printf("ok\n");
 	if (!data->start->weight && !data->way)
 		ft_exception("ERROR");
 	//ft_display_ways(data->way);
