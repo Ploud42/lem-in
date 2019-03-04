@@ -6,7 +6,7 @@
 #    By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 16:22:42 by jsobel            #+#    #+#              #
-#    Updated: 2019/02/21 16:40:57 by jsobel           ###   ########.fr        #
+#    Updated: 2019/03/04 19:38:25 by jsobel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC =		main.c			\
 OBJ		= $(addprefix ./obj/,$(SRC:.c=.o))
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 LIBFTA	= ./libft/libft.a
 LIBINCL = -I./libft/includes
