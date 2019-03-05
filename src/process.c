@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/04 20:01:07 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:17:22 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int		ft_save_way(t_lemin *data)
 	data->name = data->start->name;
 	if (!(data->l = malloc(sizeof(t_way))))
 		exit(EXIT_FAILURE);
-	if (!(data->l->tab = malloc(sizeof(char *) * (data->weight + 1))))
+	if (!(data->l->tab = malloc(sizeof(char*) * (data->weight))))
 		exit(EXIT_FAILURE);
-	data->l->tab[data->weight] = 0;
-	if (!(data->l->place = ft_memalloc(sizeof(int) * (data->weight))))
+	data->l->tab[data->weight - 1] = 0;
+	if (!(data->l->place = ft_intmemalloc(data->weight)))
 		exit(EXIT_FAILURE);
 	data->l->lenght = data->weight - 1;
 	data->l->lants = data->l->lenght;
@@ -143,31 +143,7 @@ void	ft_process(t_lemin *data)
 		data->weight = 1;
 		ft_process_weight(data);
 	}
-	printf("ok\n");
 	if (!data->start->weight && !data->way)
 		ft_exception("ERROR");
-	//ft_display_ways(data->way);
-	//printf("lignemax = %d\n", data->lignemax);
 	ft_lignemax(data);
 }
-
-/*void	ft_process(t_lemin *data)
-{
-	data->weight = 1;
-	ft_process_weight(data);
-	ft_display_node(data->list, 1);
-	if (!data->start->weight)
-		ft_exception("ERROR");
-	ft_save_way(data);
-	ft_delete_way(data);
-	ft_display_ways(data->way);
-	data->ww = data->start->weight;
-	data->weight = 1;
-	ft_reset_weight(data->list);
-	ft_process_weight(data);
-	if ((data->start->weight - data->ww + 1) < data->ants && ft_save_way(data))
-			ft_delete_way(data);
-	ft_display_node(data->list, 1);
-	ft_display_ways(data->way);
-	ft_display_links(data->links);
-}*/

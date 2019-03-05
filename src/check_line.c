@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/04 19:59:31 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/05 18:58:20 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ static int	ft_creat_links(t_lemin *data)
 			exit(EXIT_FAILURE);
 		if (!(data->t->name2 = ft_strdup(data->tab[1])))
 			exit(EXIT_FAILURE);
-		//printf("tab[0] = '%s' tab[1] = '%s' et tablen = %d\n",data->tab[0],
-		//data->tab[1], ft_tablen(data->tab));
 		free(data->tab[0]);
 		free(data->tab[1]);
-		//free(data->tab);
+		free(data->tab);
 		data->tab = NULL;
 		return (1);
 	}

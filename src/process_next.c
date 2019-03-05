@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:11:19 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/21 17:31:17 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/05 17:45:52 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		ft_lignemax(t_lemin *data)
 			data->l = data->way;
 		}
 	}
-	//printf("lignemax = %d\n", data->lignemax);
 	return (data->lignemax);
 }
 

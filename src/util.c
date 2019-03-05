@@ -6,12 +6,28 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 16:24:15 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/01 19:26:30 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/05 18:52:26 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
+
+int		*ft_intmemalloc(size_t size)
+{
+	int		*temp;
+	size_t	i;
+
+	i = 0;
+	if (!(temp = malloc(sizeof(int) * size)))
+		return (NULL);
+	while (i < size)
+	{
+		temp[i] = 0;
+		i++;
+	}
+	return (temp);
+}
 
 int		ft_tablen(char **tab)
 {
