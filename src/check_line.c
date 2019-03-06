@@ -6,35 +6,12 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/05 18:58:20 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/06 17:54:16 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
-
-void		ft_display_node(t_node *list, int weight)
-{
-	while (list)
-	{
-		ft_putstr(list->name);
-		write(1, " ", 1);
-		//ft_putnbr(list->x);
-		write(1, " ", 1);
-		//ft_putnbr(list->y);
-		if (list->value == START)
-			ft_putstr(" start\n");
-		else if (list->value == END)
-			ft_putstr(" end\n");
-		else
-			ft_putstr(" room\n");
-		if (weight)
-		{
-			printf("weight = %d\n", list->weight);
-		}
-		list = list->next;
-	}
-}
 
 int			ft_check_name(t_lemin *data, char *name)
 {
@@ -53,12 +30,28 @@ int			ft_check_name(t_lemin *data, char *name)
 	return (0);
 }
 
+static int	ft_check_link(t_lemin *data)
+{
+	data->t = data->links;
+	while (data->t)
+	{
+		if (!ft_strcmp(data->t->name1, data->tab[0]) &&
+		!ft_strcmp(data->t->name2, data->tab[1]))
+			return (0);
+		else if (!ft_strcmp(data->t->name1, data->tab[1]) &&
+		!ft_strcmp(data->t->name2, data->tab[0]))
+			return (0);
+		data->t = data->t->next;
+	}
+	return (1);
+}
+
 static int	ft_creat_links(t_lemin *data)
 {
 	if (!(data->tab = ft_strsplit(data->line, '-')))
 		ft_exception("ERROR");
 	if (ft_tablen(data->tab) == 2 && ft_check_name(data, data->tab[0]) &&
-	ft_check_name(data, data->tab[1]))
+	ft_check_name(data, data->tab[1]) && ft_check_link(data))
 	{
 		if (!(data->t = malloc(sizeof(t_link))))
 			ft_exception("ERROR");
@@ -68,9 +61,7 @@ static int	ft_creat_links(t_lemin *data)
 			exit(EXIT_FAILURE);
 		if (!(data->t->name2 = ft_strdup(data->tab[1])))
 			exit(EXIT_FAILURE);
-		free(data->tab[0]);
-		free(data->tab[1]);
-		free(data->tab);
+		ft_free_tab(data);
 		data->tab = NULL;
 		return (1);
 	}
@@ -113,11 +104,12 @@ int			ft_check_line(t_lemin *data)
 {
 	if (!data->ants && data->line[0] != '#' && data->line[0] != 'L')
 	{
-		if (!ft_strisdigit(data->line) || !(data->ants = ft_atoi(data->line)))
+		if (!ft_strisdigit(data->line) || !(data->ants = ft_atoui(data->line))
+		|| data->ants > 2147483647)
 			ft_exception("ERROR");
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
-	ft_strchr(data->line, ' '))
+	ft_space_count(data->line))
 		ft_creat_node(data);
 	else if (data->line[0] == '#' && data->line[1] == '#')
 	{

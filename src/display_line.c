@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:05:57 by jsobel            #+#    #+#             */
-/*   Updated: 2019/02/21 16:03:33 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/06 16:20:40 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_display_lines(t_lemin *data)
 {
 	data->flag = 1;
 	data->i = 1;
+	write(1, "\n", 1);
 	while (data->flag)
 	{
 		data->flag = 0;

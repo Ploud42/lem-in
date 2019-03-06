@@ -6,12 +6,35 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/04 19:57:01 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/06 19:17:55 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
+// ne pas oublier -g dans makefile
+void		ft_display_node(t_node *list, int weight)
+{
+	while (list)
+	{
+		ft_putstr(list->name);
+		write(1, " ", 1);
+		//ft_putnbr(list->x);
+		write(1, " ", 1);
+		//ft_putnbr(list->y);
+		if (list->value == START)
+			ft_putstr(" start\n");
+		else if (list->value == END)
+			ft_putstr(" end\n");
+		else
+			ft_putstr(" room\n");
+		if (weight)
+		{
+			printf("weight = %d\n", list->weight);
+		}
+		list = list->next;
+	}
+}
 
 void	ft_display_links(t_link *links)
 {
@@ -61,7 +84,8 @@ int		main(void)
 	ft_process(&data);
 	//ft_display_node(data.list, 1);
 	//printf("%d fourmis\n", data.ants);
-	ft_display_lines(&data);
+	if (data.way)
+		ft_display_lines(&data);
 	ft_free_lemin(&data);
 	return (0);
 }

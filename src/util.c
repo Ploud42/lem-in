@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 16:24:15 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/05 18:52:26 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/06 17:54:47 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,22 @@ int		*ft_intmemalloc(size_t size)
 		i++;
 	}
 	return (temp);
+}
+
+int		ft_space_count(char *str)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			count++;
+		i++;
+	}
+	return (count == 2);
 }
 
 int		ft_tablen(char **tab)
@@ -55,17 +71,28 @@ int		ft_strisdigit(char *str)
 	return (1);
 }
 
-void	ft_free_tab(t_lemin *data)
+uint	ft_atoui(const char *str)
 {
-	int i;
+	size_t	i;
+	uint	nb;
+	uint	sign;
 
 	i = 0;
-	while (data->tab && data->tab[i])
+	nb = 0;
+	sign = 1;
+	while (*str == ' ' || *str == '\n' || *str == '\t' ||
+			*str == '\f' || *str == '\v' || *str == '\r')
+		str++;
+	if (*str == '-')
+		sign = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (str[i] && '0' <= str[i] && str[i] <= '9')
 	{
-		free(data->tab[i]);
-		data->tab[i] = NULL;
+		nb += str[i] - 48;
+		if (str[i + 1] && '0' <= str[i + 1] && str[i + 1] <= '9')
+			nb *= 10;
 		i++;
 	}
-	free(data->tab);
-	data->tab = NULL;
+	return (nb * sign);
 }

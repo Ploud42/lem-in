@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/05 18:51:56 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/06 17:55:48 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ typedef struct		s_lemin
 	char			*name;
 	t_node			*start;
 	t_node			*end;
-	int				ants;
-	int				i;
+	uint			ants;
+	uint			i;
 	int				value;
 	int				weight;
-	int				wnbr;
+	uint			wnbr;
 	int				lignemax;
 	int				flag;
 	char			**tab;
@@ -82,15 +82,17 @@ typedef struct		s_lemin
 void				ft_free_link(t_lemin *data);
 void				ft_free_next(t_lemin *data);
 void				ft_free_lemin(t_lemin *data);
+void				ft_free_tab(t_lemin *data);
 
 void				ft_gogo(t_lemin *data);
 void				ft_display_places(t_lemin *data);
 void				ft_display_lines(t_lemin *data);
 
 int					*ft_intmemalloc(size_t size);
+int					ft_space_count(char *str);
 int					ft_tablen(char **tab);
 int					ft_strisdigit(char *str);
-void				ft_free_tab(t_lemin *data);
+uint				ft_atoui(const char *str);
 
 int					ft_lignemax(t_lemin *data);
 void				ft_delete_way(t_lemin *data);
