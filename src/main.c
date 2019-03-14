@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/12 16:49:45 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/14 19:12:32 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ void	ft_display_links(t_link *links)
 	}
 }
 
-void	ft_exception(char *s)
+void	ft_exception(char *s, t_lemin *data)
 {
 	ft_putendl(s);
+	ft_free_lemin(data);
 	exit(EXIT_FAILURE);
 }
 
@@ -78,7 +79,7 @@ int		main(void)
 		data.line = NULL;
 	}
 	if (!data.start || !data.end)
-		ft_exception("ERROR");
+		ft_exception("ERROR", &data);
 	//ft_display_node(data.list, 0);
 	//ft_display_links(data.links);
 	ft_process(&data);

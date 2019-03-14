@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/06 17:55:48 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/14 19:14:05 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void				ft_display_node(t_node *list, int weight);
 int					ft_check_name(t_lemin *data, char *name);
 int					ft_check_line(t_lemin *data);
 
-void				ft_exception(char *s);
+void				ft_exception(char *s, t_lemin *data);
 int					get_next_line(const int fd, char **line);
 
 #endif

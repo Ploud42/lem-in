@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/06 17:54:16 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/14 19:35:17 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ static int	ft_check_link(t_lemin *data)
 static int	ft_creat_links(t_lemin *data)
 {
 	if (!(data->tab = ft_strsplit(data->line, '-')))
-		ft_exception("ERROR");
+		exit(EXIT_FAILURE);
 	if (ft_tablen(data->tab) == 2 && ft_check_name(data, data->tab[0]) &&
-	ft_check_name(data, data->tab[1]) && ft_check_link(data))
+	ft_check_name(data, data->tab[1])
+	&& ft_strcmp(data->tab[0], data->tab[1]) && ft_check_link(data))
 	{
 		if (!(data->t = malloc(sizeof(t_link))))
-			ft_exception("ERROR");
+			exit(EXIT_FAILURE);
 		data->t->next = data->links;
 		data->links = data->t;
 		if (!(data->t->name1 = ft_strdup(data->tab[0])))
@@ -79,11 +80,11 @@ static void	ft_creat_node(t_lemin *data)
 	ft_strisdigit(data->tab[1]) && ft_strisdigit(data->tab[2]))
 	{
 		if (!(data->p = malloc(sizeof(t_node))))
-			ft_exception("ERROR");
+			exit(EXIT_FAILURE);
 		data->p->next = data->list;
 		data->list = data->p;
 		if (!(data->p->name = ft_strdup(data->tab[0])))
-			ft_exception("ERROR");
+			exit(EXIT_FAILURE);
 		data->p->weight = 0;
 		data->p->value = data->value;
 		data->value = 0;
@@ -96,7 +97,7 @@ static void	ft_creat_node(t_lemin *data)
 		}
 	}
 	else
-		ft_exception("ERROR");
+		ft_exception("ERROR", data);
 	ft_free_tab(data);
 }
 
@@ -106,7 +107,7 @@ int			ft_check_line(t_lemin *data)
 	{
 		if (!ft_strisdigit(data->line) || !(data->ants = ft_atoui(data->line))
 		|| data->ants > 2147483647)
-			ft_exception("ERROR");
+			ft_exception("ERROR", data);
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
 	ft_space_count(data->line))
@@ -117,6 +118,8 @@ int			ft_check_line(t_lemin *data)
 			data->value = START;
 		else if (!ft_strcmp(&data->line[2], "end"))
 			data->value = END;
+		else
+			ft_exception("ERROR", data);
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
 	ft_strchr(data->line, '-') == ft_strrchr(data->line, '-'))
