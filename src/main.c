@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:10:14 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/14 19:12:32 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/26 19:00:47 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int		main(void)
 		free(data.line);
 		data.line = NULL;
 	}
-	if (!data.start || !data.end)
-		ft_exception("ERROR", &data);
+	//if (!data.start || !data.end)
+	//	ft_exception("ERROR", &data);
 	//ft_display_node(data.list, 0);
 	//ft_display_links(data.links);
-	ft_process(&data);
+	//ft_process(&data);
 	//ft_display_node(data.list, 1);
 	//printf("%d fourmis\n", data.ants);
 	if (data.way)
