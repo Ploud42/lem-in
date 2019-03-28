@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/14 19:14:05 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/27 19:44:52 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/stat.h>
 # include "../libft/includes/libft.h"
 
-# define BUFF_SIZE	32
+# define BUFF_SIZE	30
 # define ROOM		0
 # define START		2
 # define END		1

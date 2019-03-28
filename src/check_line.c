@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/08 17:08:31 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/26 19:15:22 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/27 20:25:54 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ static int	ft_creat_links(t_lemin *data)
 static void	ft_creat_node(t_lemin *data)
 {
 	data->tab = ft_strsplit(data->line, ' ');
-	if (ft_space_count(data->line) && !ft_check_name(data, data->tab[0])
-	&& ft_tablen(data->tab) == 3 && ft_strisdigit(data->tab[1])
-	&& ft_strisdigit(data->tab[2]))
+	if (!ft_check_name(data, data->tab[0]) && ft_tablen(data->tab) == 3 &&
+	ft_strisdigit(data->tab[1]) && ft_strisdigit(data->tab[2]))
 	{
 		if (!(data->p = malloc(sizeof(t_node))))
 			exit(EXIT_FAILURE);
@@ -108,10 +107,10 @@ int			ft_check_line(t_lemin *data)
 	{
 		if (!ft_strisdigit(data->line) || !(data->ants = ft_atoui(data->line))
 		|| data->ants > 2147483647)
-			ft_exception("ERROR", data);
+			return (0);
 	}
 	else if (data->line[0] != '#' && data->line[0] != 'L' &&
-	ft_strchr(data->line, ' '))
+	ft_space_count(data->line))
 		ft_creat_node(data);
 	else if (data->line[0] == '#' && data->line[1] == '#')
 	{

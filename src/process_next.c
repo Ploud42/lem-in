@@ -6,12 +6,17 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:11:19 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/14 16:46:41 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/03/28 15:11:04 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include<stdio.h>
+
+static int	ft_fill_the_cup(t_lemin *data)
+{
+	
+}
 
 int		ft_lignemax(t_lemin *data)
 {
