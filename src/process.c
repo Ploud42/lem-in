@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:20:52 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/14 19:13:28 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/04/17 18:29:45 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ int		ft_save_way(t_lemin *data)
 			exit(EXIT_FAILURE);
 		data->name = data->p->name;
 	}
-	data->l->next = data->way;
-	data->way = data->l;
+	ft_add_end_list(data);
+//	data->l->next = data->way;
+//	data->way = data->l;
 	return (1);
 }
 
@@ -96,7 +97,7 @@ void	ft_put_weight(t_lemin *data, char *name, int weight)
 	}
 }
 
-void	ft_process_weight(t_lemin *data)
+int		ft_process_weight(t_lemin *data)
 {
 	data->p = data->list;
 	data->flag = 0;
@@ -117,33 +118,37 @@ void	ft_process_weight(t_lemin *data)
 		data->p = data->p->next;
 	}
 	if (data->start->weight)
-		return ;
+		return (data->start->weight);
 	data->weight++;
 	if (data->flag)
-		ft_process_weight(data);
+		return (ft_process_weight(data));
+	else
+		return (0);
 }
 
 void	ft_process(t_lemin *data)
 {
 	data->weight = 1;
 	data->wnbr = 0;
-	ft_process_weight(data);
+	/*ft_process_weight(data);
 	if (data->start->weight && ft_save_way(data) && ++data->wnbr)
 		ft_delete_way(data);
 	data->lignemax = data->start->weight - 1 + data->ants;
 	data->weight = 1;
 	ft_reset_weight(data);
-	ft_process_weight(data);
-	while (data->start->weight && ft_lignemax(data) > data->start->weight &&
-	data->wnbr <= data->ants)
+	ft_process_weight(data);*/
+	while (ft_process_weight(data) && ft_lignemax(data) >= data->start->weight
+	&& data->wnbr <= data->ants)
 	{
 		if (data->start->weight && ft_save_way(data) && ++data->wnbr)
 			ft_delete_way(data);
 		ft_reset_weight(data);
 		data->weight = 1;
-		ft_process_weight(data);
+		//ft_process_weight(data);
 	}
 	if (!data->start->weight && !data->way)
 		ft_exception("ERROR", data);
-	ft_lignemax(data);
+	//ft_display_ways(data->way);
+	if (!data->start->weight)
+		ft_lignemax(data);
 }

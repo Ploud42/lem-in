@@ -6,7 +6,7 @@
 /*   By: jsobel <jsobel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 17:25:08 by jsobel            #+#    #+#             */
-/*   Updated: 2019/03/27 19:44:52 by jsobel           ###   ########.fr       */
+/*   Updated: 2019/04/17 17:44:06 by jsobel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,14 @@ uint				ft_atoui(const char *str);
 
 int					ft_lignemax(t_lemin *data);
 void				ft_delete_way(t_lemin *data);
+void				ft_add_end_list(t_lemin *data);
 void				ft_reset_weight(t_lemin *data);
 
 void				ft_display_ways(t_way *way);
 int					ft_connect(t_lemin *data, char *name);
 int					ft_save_way(t_lemin *data);
 void				ft_put_weight(t_lemin *data, char *name, int weight);
-void				ft_process_weight(t_lemin *data);
+int					ft_process_weight(t_lemin *data);
 void				ft_process(t_lemin *data);
 
 void				ft_display_links(t_link *links);
